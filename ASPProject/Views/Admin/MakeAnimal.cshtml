@@ -1,0 +1,112 @@
+﻿@model ASPProject.Models.Animal
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MakeAnimal</title>
+    <style>
+        span {
+            color: red
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var File;
+        $(function () {
+            $("#img").change(function () {
+                var FileType = ["jpeg", "gif", "jpg", "png", "bmp"];
+                if ($.inArray($(this).val().split(".").pop().toLowerCase(), FileType) == -1) {
+                    $("#msgImg").text("Upload only image type");
+                    $("#img").val("");
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    @if (Model == null)
+    {
+        <form id="newAnimal" asp-controller="Admin" asp-action="MakeNewAnimal" method="post" enctype="multipart/form-data">
+            <div>
+                <label asp-for="Age"></label>
+                <input asp-for="Age" />
+                <span asp-validation-for="Age"></span>
+            </div>
+            <div>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div>
+                <label asp-for="ImgFile"></label>
+                <input id="img" asp-for="ImgFile" accept="Image/*" />
+                <span id="msgImg">
+                    @if (ViewBag.ShowEror != null)
+                    {
+                        @ViewBag.ShowEror
+                    }
+                </span>
+            </div>
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <option value="@item.CategoryId">@item.Name</option>
+                }
+            </select>
+            <div>
+                <label asp-for="Descrition"></label>
+                <textarea rows="10" cols="40" asp-for="Descrition"></textarea>
+                <span asp-validation-for="Descrition"></span>
+            </div>
+            <input type="submit" value="Submit" />
+        </form>
+    }
+
+    else
+    {
+        <form asp-controller="Admin" asp-action="ChangeAnimal" asp-route-id="@Model.AnimalId" enctype="multipart/form-data" method="post">
+            <div>
+                <label asp-for="Age"></label>
+                <input asp-for="Age" value="@Model.Age" />
+                <span asp-validation-for="Age"></span>
+            </div>
+
+            <div>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" value="@Model.Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div>
+                <label asp-for="ImgFile"></label>
+                <input id="img" asp-for="ImgFile" accept="Image/*" />
+                <span id="msgImg"></span>
+            </div>
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    if (Model.CategoryId == item.CategoryId)
+                    {
+                        <option value="@item.CategoryId" selected>@item.Name</option>
+                    }
+
+                    else
+                    {
+                        <option value="@item.CategoryId">@item.Name</option>
+
+                    }
+                }
+            </select>
+            <div>
+                <label asp-for="Descrition"></label>
+                <textarea rows="10" cols="40" asp-for="Descrition" value="@Model.Descrition"></textarea>
+                <span asp-validation-for="Descrition"></span>
+            </div>
+            <input type="submit" value="Submit" />
+        </form>
+    }
+
+</body>
+</html>

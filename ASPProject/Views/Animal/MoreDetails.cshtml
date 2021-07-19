@@ -1,0 +1,59 @@
+﻿@model ASPProject.Models.Animal
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MoreDetails</title>
+    <link href="~/Css/StyleSheetMoreDetails.css" rel="stylesheet" />
+</head>
+<body>
+    <table style="width:50%">
+        <tr class="Headers">
+            <th>Picture</th>
+            <th>Name of animal</th>
+            <th>Description</th>
+            <th>Age of the animal</th>
+            <th>Categorie</th>
+            <th>Comments</th>
+            <th>Put a comment</th>
+        </tr>
+        <tr>
+            <th>
+                <img src="~/Pics/@Model.PictureName" />
+            </th>
+            <th>
+                @Model.Name
+            </th>
+            <th>
+                @Model.Descrition
+            </th>
+            <th>
+                @Model.Age
+            </th>
+            <th>
+                @ViewBag.Categorie
+            </th>
+            <th style="max-height:100%; max-width:100%">
+                <table  border="10" style="border:1px solid black;">
+                    @foreach (var item in ViewBag.Comments)
+                    {
+                        <tr style="border:1px solid red; padding:5px;border-collapse:collapse;">
+                            <td style="font-size:xx-small;"> @item</td>
+                        </tr>
+                    }
+                </table>
+            </th>
+            <th>
+                @using (Html.BeginForm())
+                {
+                    <input type="text" name="comment">
+                    <input type="submit" value="Submit new comment" />
+                }
+            </th>
+        </tr>
+
+    </table>
+
+</body>
+</html>

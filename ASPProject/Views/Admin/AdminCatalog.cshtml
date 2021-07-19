@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ASPProject.Models.Animal>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminCatalog</title>
+    <link href="~/Css/StyleSheetCatalogs.css" rel="stylesheet" />
+</head>
+<body>
+    <form asp-controller="Admin" asp-action="AdminCatalog">
+        <select name="id" onchange="this.form.submit()" value="@ViewBag.selected">
+            @if (ViewBag.selected == 0)
+            {
+                <option value="0" selected>All</option>
+            }
+            else
+            {
+                <option value="0">All</option>
+
+            }
+            @foreach (var item in ViewBag.Categories)
+            {
+                if (ViewBag.selected == item.CategoryId)
+                {
+                    <option value="@item.CategoryId" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.CategoryId">@item.Name</option>
+                }
+            }
+        </select>
+    </form>
+    <table style="width:70%">
+        <tr class="Headers">
+            <th>Picture</th>
+            <th>Name of animal</th>
+            <th>Description</th>
+            <th>Change</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    <img src="~/Pics/@item.PictureName"/>
+                </th>
+                <th>
+                    @item.Name
+                </th>
+                <th>
+                    @item.Descrition
+                </th>
+                <th>
+                    <a asp-controller="Admin" asp-action="ChangeAnimal" asp-route-id="@item.AnimalId">Change animal </a>
+                </th>
+                <th>
+                    <a asp-controller="Admin" asp-action="DeleteAnimal" asp-route-id="@item.AnimalId">Delete animal </a>
+                </th>
+
+            </tr>
+        }
+    </table>
+    <a asp-controller="Admin" asp-action="MakeNewAnimal"><input type="button" value="Create new animal"/></a>
+</body>
+</html>

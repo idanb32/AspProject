@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ASPProject.Models.Animal>
+<link href="~/Css/StyleSheetCatalogs.css" rel="stylesheet" />
+<table style="width:70%">
+    <tr class="Headers">
+        <th>Picture</th>
+        <th>Name of animal</th>
+        <th>Description</th>
+        <th>Get more info</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                <img src="~/Pics/@item.PictureName" />
+            </th>
+            <th>
+                @item.Name
+            </th>
+            <th>
+                @item.Descrition
+            </th>
+            <th>
+                <a asp-controller="Animal" asp-action="MoreDetails" asp-route-id="@item.AnimalId">More details about this animal </a>
+            </th>
+
+        </tr>
+    }
+
+</table>

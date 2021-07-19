@@ -1,0 +1,21 @@
+﻿table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    text-align: left;
+    font-family:Arial;
+}
+
+img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.Headers{
+    color: red;
+}

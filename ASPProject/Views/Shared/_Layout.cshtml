@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dropdown" >
+        <button class="dropbtn">Change page</button>
+        <div class="dropdown-content">
+            <a asp-controller="Animal" asp-action="Index">Home</a>
+            <a asp-controller="Animal" asp-action="Catalog">Catalog</a>
+            <a asp-controller="Admin" asp-action="AdminCatalog">Admin</a>
+        </div>
+    </div>
+    <div id="MainDiv">
+        @RenderBody()
+    </div>
+</body>
+</html>
