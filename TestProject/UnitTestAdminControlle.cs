@@ -148,7 +148,7 @@ namespace TestProject
             var newBulBul = myRep.GetAnimal(thisAnimal);
             newBulBul.ImgFile = null;
             newBulBul.Name = "New BulBul";
-            var viewResult = testControler.MakeAnimal(thisAnimal,newBulBul) as ViewResult;
+            var viewResult = testControler.ChangeAnimal(thisAnimal,newBulBul) as ViewResult;
             var result = myRep.GetAnimal(thisAnimal);
             Assert.IsTrue(result.Name== "New BulBul");
         }
